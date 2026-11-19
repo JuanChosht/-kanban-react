@@ -6,7 +6,8 @@ describe('lógica de tareas', () => {
     const tasks = createTask([], { title: '  Diseñar logo  ' })
     expect(tasks).toHaveLength(1)
     expect(tasks[0].title).toBe('Diseñar logo')
-    expect(tasks[0].status).toBe('todo')
+    // Fallo intencional: el estado por defecto real es 'todo'
+    expect(tasks[0].status).toBe('done')
   })
 
   it('no permite crear una tarea sin título', () => {
