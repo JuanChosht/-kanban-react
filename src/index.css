@@ -1,0 +1,215 @@
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --text: #172b4d;
+  --muted: #5e6c84;
+  --border: #dfe1e6;
+  --primary: #0052cc;
+  --primary-hover: #0747a6;
+  --danger: #de350b;
+  --todo: #6b778c;
+  --progress: #0065ff;
+  --done: #36b37e;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.subtitle {
+  margin: 4px 0 20px;
+  color: var(--muted);
+}
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.task-form input {
+  flex: 1 1 220px;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+button.secondary {
+  background: #ebecf0;
+  color: var(--text);
+}
+
+button.secondary:hover {
+  background: #dfe1e6;
+}
+
+button.danger {
+  background: transparent;
+  color: var(--danger);
+}
+
+button.danger:hover {
+  background: #ffebe6;
+}
+
+.form-error {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  background: #ebecf0;
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 200px;
+  border-top: 4px solid var(--todo);
+  transition: background 0.15s;
+}
+
+.column-in-progress {
+  border-top-color: var(--progress);
+}
+
+.column-done {
+  border-top-color: var(--done);
+}
+
+.column.is-over {
+  background: #dfe5f0;
+}
+
+.column-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 0.8rem;
+}
+
+.column-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 24px 0;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.25);
+  cursor: grab;
+}
+
+.card.editing {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: default;
+}
+
+.card-title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.card-desc {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.card-actions select {
+  padding: 4px 6px;
+  font-size: 0.85rem;
+}
+
+.card-actions button {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
