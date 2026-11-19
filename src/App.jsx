@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
-import { STATUSES, createTask, deleteTask, moveTask, tasksByStatus, updateTask } from './tasks'
+import {
+  STATUSES,
+  createTask,
+  deleteTask,
+  filterTasks,
+  moveTask,
+  tasksByStatus,
+  updateTask,
+} from './tasks'
 import TaskForm from './components/TaskForm'
 import Column from './components/Column'
 
@@ -16,6 +24,8 @@ function loadTasks() {
 
 export default function App() {
   const [tasks, setTasks] = useState(loadTasks)
+  const [query, setQuery] = useState('')
+  const visibleTasks = filterTasks(tasks, query)
 
   useEffect(() => {
     try {
@@ -39,12 +49,21 @@ export default function App() {
 
       <TaskForm onCreate={handleCreate} />
 
+      <input
+        type="search"
+        className="search"
+        aria-label="Buscar tareas"
+        placeholder="Buscar tareas por título o descripción…"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
       <main className="board">
         {STATUSES.map((status) => (
           <Column
             key={status.id}
             status={status}
-            tasks={tasksByStatus(tasks, status.id)}
+            tasks={tasksByStatus(visibleTasks, status.id)}
             onUpdate={handleUpdate}
             onDelete={handleDelete}
             onMove={handleMove}

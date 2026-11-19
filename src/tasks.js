@@ -61,3 +61,11 @@ export function moveTask(tasks, id, status) {
 export function tasksByStatus(tasks, status) {
   return tasks.filter((t) => t.status === status)
 }
+
+export function filterTasks(tasks, query) {
+  const q = (query ?? '').trim().toLowerCase()
+  if (!q) return tasks
+  return tasks.filter(
+    (t) => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q),
+  )
+}

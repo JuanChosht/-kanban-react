@@ -53,6 +53,16 @@ describe('App Kanban', () => {
     expect(screen.queryByText('Tarea vieja')).not.toBeInTheDocument()
   })
 
+  it('filtra las tareas con el buscador', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await addTask(user, 'Comprar café')
+    await addTask(user, 'Llamar al cliente')
+    await user.type(screen.getByLabelText('Buscar tareas'), 'café')
+    expect(screen.getByText('Comprar café')).toBeInTheDocument()
+    expect(screen.queryByText('Llamar al cliente')).not.toBeInTheDocument()
+  })
+
   it('elimina una tarea', async () => {
     const user = userEvent.setup()
     render(<App />)
