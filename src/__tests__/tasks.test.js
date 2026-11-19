@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { createTask, updateTask, deleteTask, moveTask, tasksByStatus } from '../tasks'
+import {
+  createTask,
+  updateTask,
+  deleteTask,
+  moveTask,
+  tasksByStatus,
+  filterTasks,
+} from '../tasks'
 
 describe('lógica de tareas', () => {
   it('crea una tarea en estado Pendiente por defecto', () => {
@@ -35,6 +42,14 @@ describe('lógica de tareas', () => {
     tasks = moveTask(tasks, task.id, 'done')
     expect(tasksByStatus(tasks, 'done')).toHaveLength(1)
     expect(tasksByStatus(tasks, 'todo')).toHaveLength(0)
+  })
+
+  it('filtra tareas por texto sin distinguir mayúsculas', () => {
+    let tasks = createTask([], { title: 'Preparar Demo', description: 'para el viernes' })
+    tasks = createTask(tasks, { title: 'Otra cosa' })
+    expect(filterTasks(tasks, 'demo')).toHaveLength(1)
+    expect(filterTasks(tasks, 'VIERNES')).toHaveLength(1)
+    expect(filterTasks(tasks, '')).toHaveLength(2)
   })
 
   it('rechaza un estado inválido', () => {

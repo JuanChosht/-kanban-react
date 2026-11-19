@@ -98,6 +98,11 @@ button.danger:hover {
   background: #ffebe6;
 }
 
+.search {
+  width: 100%;
+  margin: -8px 0 20px;
+}
+
 .form-error {
   flex-basis: 100%;
   margin: 0;
